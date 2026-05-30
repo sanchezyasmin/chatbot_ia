@@ -5,6 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const characterImage = document.getElementById('character-image');
     const voiceSelect = document.getElementById('voice-select');
     const status = document.getElementById('status');
+    const voiceMuteButton = document.getElementById('voice-mute-button');
+    const micOnIcon = voiceMuteButton.querySelector('.mic-on-icon');
+    const micOffIcon = voiceMuteButton.querySelector('.mic-off-icon');
+
+    let voiceEnabled = true;
+
+    // Toggle voice state
+    voiceMuteButton.addEventListener('click', () => {
+        voiceEnabled = !voiceEnabled;
+        if (voiceEnabled) {
+            voiceMuteButton.classList.add('active');
+            micOnIcon.style.display = 'block';
+            micOffIcon.style.display = 'none';
+        } else {
+            voiceMuteButton.classList.remove('active');
+            micOnIcon.style.display = 'none';
+            micOffIcon.style.display = 'block';
+            // Stop speaking immediately if muted during speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            clearInterval(lipSyncInterval);
+            characterImage.src = closedMouthImg;
+        }
+    });
 
     const openMouthImg = `/static/images/char-mouth-open.png?v=${sessionId}`;
     const closedMouthImg = `/static/images/char-mouth-closed.png?v=${sessionId}`;
@@ -83,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const speak = (text) => {
+        if (!voiceEnabled) {
+            return;
+        }
         if (speechSynthesis.speaking) {
             speechSynthesis.cancel();
         }

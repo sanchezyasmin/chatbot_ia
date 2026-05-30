@@ -1,9 +1,9 @@
 :root {
     --background-color: #131416;
     --container-background: #1A1B1E;
-    --text-color: #EAEAEA;
-    --primary-accent: #8A2BE2; /* BlueViolet */
-    --secondary-accent: #4169E1; /* RoyalBlue */
+    --text-color: #eeebe3;
+    --primary-accent: #af5024; /* BlueViolet */
+    --secondary-accent: #dbb124; /* RoyalBlue */
     --input-background: #2C2D30;
     --border-color: #333;
 }
@@ -21,13 +21,13 @@ body {
 
 .chat-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
     background-color: var(--container-background);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 2px solid #111;
     height: 95vh;
 }
 
@@ -44,8 +44,8 @@ body {
 }
 
 .character-viewer #character-image {
-    width: 600px;
-    height: 600px;
+    width: 550px;
+    height: 550px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -76,6 +76,11 @@ body {
     border-top: 1px solid var(--border-color);
     background-color: var(--background-color);
     gap: 0.5rem;
+    align-items: center;
+}
+
+#voice-select, #text-input, #voice-mute-button {
+    box-sizing: border-box;
 }
 
 #voice-select {
@@ -86,6 +91,31 @@ body {
     padding: 0.8rem;
     font-family: 'Inter', sans-serif;
     height: 50px;
+}
+
+#voice-mute-button {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#voice-mute-button.active {
+    color: var(--primary-accent);
+    border-color: var(--primary-accent);
+    background-color: var(--input-background);
+}
+
+#voice-mute-button:hover {
+    border-color: var(--secondary-accent);
 }
 
 #text-input {
