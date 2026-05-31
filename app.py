@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from google.adk.runners import InMemoryRunner
 from google.genai import types
 import asyncio
 import os
 
 app = Flask(__name__)
+CORS(app)
+
+client = genai.Client()
 
 runner = None
 character_exists = os.path.exists('character.py')
@@ -52,4 +56,6 @@ async def chat():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Configuração crucial para o Render não dar erro de porta
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
