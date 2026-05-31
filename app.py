@@ -5,7 +5,7 @@ import asyncio
 import os
 
 app = Flask(__name__)
-
+CORS(app)
 
 runner = None
 character_exists = os.path.exists('character.py')
