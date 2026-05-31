@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from google.adk.runners import InMemoryRunner
 from google.genai import types
 import asyncio
