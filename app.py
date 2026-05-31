@@ -8,8 +8,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-client = genai.Client()
-
 runner = None
 character_exists = os.path.exists('character.py')
 
