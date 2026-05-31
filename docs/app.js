@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Substitua a URL abaixo pelo link real que o Render gerou para você
-            const response = await fetch('https://chatbot-ia-qypr.onrender.com/chat', {
+            const response = await fetch('https://sanchezyasmin-solar-chatbot-api.hf.space/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
