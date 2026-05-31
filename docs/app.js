@@ -153,7 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
         status.textContent = "Pensando...";
 
         try {
-            const response = await fetch('/chat', {
+            // Substitua a URL abaixo pelo link real que o Render gerou para você
+            const response = await fetch('https://chatbot-ia-qypr.onrender.com/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
