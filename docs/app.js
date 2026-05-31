@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const openMouthImg = `/static/images/char-mouth-open.png?v=${sessionId}`;
-    const closedMouthImg = `/static/images/char-mouth-closed.png?v=${sessionId}`;
+    const openMouthImg = `char-mouth-open.png?v=${sessionId}`;
+    const closedMouthImg = `char-mouth-closed.png?v=${sessionId}`;
 
     // Apply cache-busted source immediately and preload images
     characterImage.src = closedMouthImg;
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         textInput.value = '';
         textInput.style.height = '50px';
-        status.textContent = "Thinking...";
+        status.textContent = "Pensando...";
 
         try {
             const response = await fetch('/chat', {
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('A conexão com o servidor falhou. Por favor, tente novamente.');
             }
 
             const data = await response.json();
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             speak(data.response);
         } catch (error) {
             console.error('Error:', error);
-            const errorMessage = 'Sorry, something went wrong. Please try again.';
+            const errorMessage = 'Sinto muito, algo deu errado. Tente novamente mais tarde.';
             typewriter(errorMessage, status);
             speak(errorMessage);
         }
