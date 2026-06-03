@@ -58,15 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
             option.setAttribute('data-name', voice.name);
             voiceSelect.appendChild(option);
 
-            if (voice.lang === 'en-US') {
-                if (usVoiceIndex === -1) { // Find the first US voice
-                    usVoiceIndex = i;
+            if (voice.lang === 'pt-BR' || voice.lang === 'pt_BR') {
+                if (ptBrVoiceIndex === -1) { // Find the first ptBR voice
+                    ptBrVoiceIndex = i;
                 }
             }
         });
 
-        if (usVoiceIndex !== -1) {
-            voiceSelect.selectedIndex = usVoiceIndex;
+        if (ptBrVoiceIndex !== -1) {
+            voiceSelect.selectedIndex = ptBrVoiceIndex;
         }
     }
 
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         status.textContent = "Pensando...";
 
         try {
-            // Substitua a URL abaixo pelo link real que o Render gerou para você
+
             const response = await fetch('https://chatbot-ia-cy3b.onrender.com/chat', {
                 method: 'POST',
                 headers: {
@@ -190,8 +190,4 @@ document.addEventListener('DOMContentLoaded', () => {
         textInput.style.height = 'auto';
         textInput.style.height = `${textInput.scrollHeight}px`;
     });
-});
-
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
 });
