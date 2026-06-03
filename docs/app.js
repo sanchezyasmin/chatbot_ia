@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             option.setAttribute('data-name', voice.name);
             voiceSelect.appendChild(option);
 
-            if (voice.lang === 'pt-BR' || voice.lang === 'pt_br' || voice.lang === 'ptbr') {
+            if (voice.lang === 'pt-BR' || voice.lang === 'pt_br' || voice.lang === 'pt_BR') {
                 if (ptVoiceIndex === -1) {
                     ptVoiceIndex = i;
                 }
