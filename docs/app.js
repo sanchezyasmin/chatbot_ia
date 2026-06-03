@@ -191,3 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         textInput.style.height = `${textInput.scrollHeight}px`;
     });
 });
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
