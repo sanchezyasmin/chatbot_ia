@@ -48,13 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateVoiceList() {
         const allVoices = speechSynthesis.getVoices();
         voices = allVoices.filter(voice => voice.name.includes('Google'));
-        if (voices.length === 0) {
-            voices = allVoices;
-        }
         voiceSelect.innerHTML = '';
 
         let ptVoiceIndex = -1;
-        let enUSVoiceIndex = -1;
 
         voices.forEach((voice, i) => {
             const option = document.createElement('option');
@@ -63,35 +59,25 @@ document.addEventListener('DOMContentLoaded', () => {
             option.setAttribute('data-name', voice.name);
             voiceSelect.appendChild(option);
 
-            if (voice.lang === 'pt-BR') {
-                if (ptVoiceIndex === -1 || voices[ptVoiceIndex].lang !== 'pt-BR') {
-                    ptVoiceIndex = i;
-                }
-            } else if (voice.lang.startsWith('pt')) {
+            if (voice.lang === 'pt-BR' || voice.lang === 'pt_br') {
                 if (ptVoiceIndex === -1) {
                     ptVoiceIndex = i;
                 }
             }
-
-            if (voice.lang === 'en-US') {
-                if (enUSVoiceIndex === -1) {
-                    enUSVoiceIndex = i;
-                }
-            }
         });
 
-        // Set the selected index: prioritize Portuguese, then English (US), then the first voice
         if (ptVoiceIndex !== -1) {
             voiceSelect.selectedIndex = ptVoiceIndex;
-        } else if (enUSVoiceIndex !== -1) {
-            voiceSelect.selectedIndex = enUSVoiceIndex;
-        } else if (voices.length > 0) {
-            voiceSelect.selectedIndex = 0;
         }
     }
 
+    populateVoiceList();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+    }
+
     const typewriter = (text, element, speed = 50) => {
-        
+        // Cancela qualquer digitação que já esteja acontecendo
         clearTimeout(currentTypingTimeout);
 
         // Use Intl.Segmenter to handle grapheme clusters correctly
