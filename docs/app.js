@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateVoiceList() {
         const allVoices = speechSynthesis.getVoices();
         voices = allVoices.filter(voice => voice.name.includes('Google'));
+        
+        if (voices.length === 0) {
+            voices = allVoices;
+        }
         voiceSelect.innerHTML = '';
 
         let ptVoiceIndex = -1;
@@ -157,6 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
         textInput.value = '';
         textInput.style.height = '50px';
         status.textContent = "Pensando...";
+
+        if (voiceEnabled) {
+            const unlockUtterance = new SpeechSynthesisUtterance('');
+            speechSynthesis.speak(unlockUtterance);
+        }
 
         try {
 
