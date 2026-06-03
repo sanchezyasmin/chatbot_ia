@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let voices = [];
     let lipSyncInterval;
+    let currentTypingTimeout;
 
     function populateVoiceList() {
         const allVoices = speechSynthesis.getVoices();
@@ -76,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const typewriter = (text, element, speed = 50) => {
+        
+        clearTimeout(currentTypingTimeout);
+
         // Use Intl.Segmenter to handle grapheme clusters correctly
         if (window.Intl && Intl.Segmenter) {
             const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
@@ -88,19 +92,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (i < segments.length) {
                     element.innerHTML += segments[i];
                     i++;
-                    setTimeout(type, speed);
+                    
+                    currentTypingTimeout = setTimeout(type, speed); 
                 }
             }
             type();
         } else {
-            // Fallback for older browsers
+            
             let i = 0;
             element.innerHTML = "";
             function type() {
                 if (i < text.length) {
                     element.innerHTML += text.charAt(i);
                     i++;
-                    setTimeout(type, speed);
+                    
+                    currentTypingTimeout = setTimeout(type, speed); 
                 }
             }
             type();
