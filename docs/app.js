@@ -58,15 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
             option.setAttribute('data-name', voice.name);
             voiceSelect.appendChild(option);
 
-            if (voice.lang === 'pt-BR' || voice.lang === 'pt_BR') {
-                if (ptBrVoiceIndex === -1) { // Find the first ptBR voice
-                    ptBrVoiceIndex = i;
+            if (voice.lang === 'en-US' || voice.lang === 'en-US') {
+                if (usVoiceIndex === -1) { // Find the first ptBR voice
+                    usVoiceIndex = i;
                 }
             }
         });
 
-        if (ptBrVoiceIndex !== -1) {
-            voiceSelect.selectedIndex = ptBrVoiceIndex;
+        if (usVoiceIndex !== -1) {
+            voiceSelect.selectedIndex = usVoiceIndex;
         }
     }
 
