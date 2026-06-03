@@ -25,3 +25,5 @@ Como o Github Pages tem funcionalidade apenas visual, foi necessário hospedar o
 e hospedado no site render.com.
 ### 🔧 Ajustes visuais na interface visual do site
 Ajustes visuais no HTML e CSS também foram implementados como melhoria do projeto original.
+### 📱 Design responsivo
+Agora o projeto conta um design responsivo e 100% funcional na versão mobile. Na falta de vozes da Google disponíveis no navegador mobile, será listada todas as vozes disponíveis no sistema.
