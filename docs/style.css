@@ -128,8 +128,8 @@ body {
     font-family: 'Inter', sans-serif;
     resize: none;
     height: 50px;
+    max-height: 50px;
     line-height: 1.5;
-    max-height: 120px;
     overflow-y: auto;
 }
 
