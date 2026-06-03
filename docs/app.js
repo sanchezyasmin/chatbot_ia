@@ -63,26 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
             option.setAttribute('data-name', voice.name);
             voiceSelect.appendChild(option);
 
-            const langNormalized = voice.lang.toLowerCase().replace('_', '-');
-
-            // Prioriza pt-br, senão qualquer outro pt- (como pt-pt)
-            if (langNormalized === 'pt-br') {
-                const currentPtLang = ptVoiceIndex !== -1 ? voices[ptVoiceIndex].lang.toLowerCase().replace('_', '-') : '';
-                if (ptVoiceIndex === -1 || currentPtLang !== 'pt-br') {
-                    ptVoiceIndex = i;
-                }
-            } else if (langNormalized.startsWith('pt')) {
+            if (voice.lang === 'pt-BR' || voice.lang === 'pt_br' || voice.lang === 'ptbr') {
                 if (ptVoiceIndex === -1) {
                     ptVoiceIndex = i;
                 }
             }
-
-            if (langNormalized === 'en-us') {
-                if (enUSVoiceIndex === -1) {
-                    enUSVoiceIndex = i;
-                }
-            }
         });
+
+        if (ptVoiceIndex !== -1) {
+            voiceSelect.selectedIndex = ptVoiceIndex;
+        }
+    }
 
     populateVoiceList();
     if (speechSynthesis.onvoiceschanged !== undefined) {
